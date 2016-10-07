@@ -1,8 +1,4 @@
 import copy
-import curses
-import time
-
-
 x = 'x'
 o = 'o'
 n = None
@@ -215,9 +211,8 @@ def move(board, player, x, y, dt=0, init=True):
 
 
 
+if __name__ == "__main__":
 
-
-def even_loop():
     game = Board()
     game.board=[
             [x,o,x],
@@ -229,7 +224,7 @@ def even_loop():
     while not game.game_end():
         game.print_board()
         o_move = raw_input("O enter your move: \n")
-        ox, oy = o_move.split('--')
+        ox, oy = o_move.split('-')
         ox, oy = int(ox), int(oy)
         game.update(ox, oy, Board.O)
 
@@ -239,9 +234,9 @@ def even_loop():
         game.print_board()
         data = game.predict()
 
-        # print '--' * 20
+        # print '-' * 20
         # for d in data:print d
-        # print '--' * 20
+        # print '-' * 20
 
         wins = filter(lambda x:x['score']==10, data)
         draws = filter(lambda x:x['score']==0, data)
@@ -276,58 +271,6 @@ def even_loop():
         print "TIE TIE"
 
     print "_____________________________________________\n"
-
-
-
-def gen_grid(screen, vg):
-    for g in vg:
-        sprint(screen, "".join(g))
-
-
-def sprint(screen, content):
-    content = content + '\n'
-    screen.addstr(content)
-
-
-def UI():
-
-    vg = [
-        ['  ', '  ', '  ', '|', '  ', '  ', '  ', '|', '  ', '  ', '  '],
-        ['  ', '  ', '  ', '|', '  ', '  ', '  ', '|', '  ', '  ', '  '],
-        ['  ', '  ', '  ', '|', '  ', '  ', '  ', '|', '  ', '  ', '  '],
-        ['--', '--', '--', '|', '--', '--', '--', '|', '--', '--', '--'],
-        ['  ', '  ', '  ', '|', '  ', '  ', '  ', '|', '  ', '  ', '  '],
-        ['  ', '  ', '  ', '|', '  ', '  ', '  ', '|', '  ', '  ', '  '],
-        ['  ', '  ', '  ', '|', '  ', '  ', '  ', '|', '  ', '  ', '  '],
-        ['--', '--', '--', '|', '--', '--', '--', '|', '--', '--', '--'],
-        ['  ', '  ', '  ', '|', '  ', '  ', '  ', '|', '  ', '  ', '  '],
-        ['  ', '  ', '  ', '|', '  ', '  ', '  ', '|', '  ', '  ', '  '],
-        ['  ', '  ', '  ', '|', '  ', '  ', '  ', '|', '  ', '  ', '  ']
-    ]
-
-
-    try:
-        screen = curses.initscr()
-        curses.noecho()
-        curses.curs_set(0)
-        screen.keypad(1)
-        gen_grid(screen, vg)
-
-        while True:
-            event = screen.getch()
-            if event == ord("q"):
-                break
-    except Exception as e:
-        curses.endwin()
-        print str(e)
-
-
-
-
-
-if __name__ == "__main__":
-    UI()
-
 
 
 

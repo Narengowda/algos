@@ -107,7 +107,7 @@ def worker(q):
             time.sleep((lift.speed/2) or 1)
 
             if lift.dirc != 0:
-                lift.log("Moving")
+                lift.log(".")
 
             time.sleep((lift.speed/2) or 1)
     except Exception as e:
