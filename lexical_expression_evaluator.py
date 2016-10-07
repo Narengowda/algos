@@ -1,18 +1,3 @@
-# Task: To Implement a logical expression evaluator
-# Expression is stored in the form of a JSON array and uses standard logical
-# operators [AND, OR, NOT] and the following arithmetic
-# operators: EQUALS (EQ), GREATER THAN (GT), LESS THAN (LT), CONTAINS (IN)
-# An expression always follows the
-# format: [OPERATOR, OPERAND, COMPARISON_VALUE(S)]
-# Few example expressions follow: rAND", ["EQ", "user.address.city", "Los Angeles"], rGT", "user.age", 35]]
-#  ["OR'; [IN", "event.category", [``infant", "child", "teen"]],["LT", "user.age", 18] ]
-# The input will be a JSON object such as
-# {"user":{"address":{"address_line":"XYZ Street", "city":"San Francisco", "state":"CA", "zipcode": "94150"}}} and the expression should evaluate to TRUE or FALSE
-# The OPERAND & COMPARISION_VALUE(S) could refer to a value in the input object or be an absolute value.
-
-
-# Using eval it will be simple.
-# This implementation is without eval
 
 import simplejson
 
@@ -22,18 +7,20 @@ context = {
     },
     "user":
         {
+            "check": True,
             "age": 19,
             "address":
                 {
                     "address_line":"XYZ Street",
                     "city":"San Francisco",
                     "state":"CA",
-                    "zipcode": "94150"}}}
+                    "zipcode": "94150",
+                    "check": False
+                }}}
 
 inp = ["OR", ["IN", "event.category", ["infant", "child", "teen"]], ["LT", "user.age", 18] ]
-
-#inp = ["AND", ["EQ", "user.address.city", "Los Angeles"], ["GT", "user.age", 35]]
-
+inp =  ["AND", ["IN", "user.address.city", ["infant", "child", "teen"]],["LT", "user.age", 18]]
+inp =  ["OR", ["EQ", "user.address.check", ["EQ", "user.address.city", "Los Angeles"]],["LT", "user.age", 18]]
 
 def exp_or(a, b):
     return a or b
