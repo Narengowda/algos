@@ -1,47 +1,34 @@
-import math
+import random
+from time import sleep
 
-x = [1, 23, 342, 1, 7, 23, 4, 11, 4, 12, 10]
-
-def parent_index(child_index):
-    # n/2 - 1
-    return int(math.ceil(float(child_index)/2) - 1)
-
-
-def children_index(parent_index):
-    x = (2 * parent_index)
-    return x+1, x+2
-
-lenx = len(x)
-
-
-def swap(data, maxheap=False):
-    mod = False
-    for i in range(lenx-1, 0, -1):
-        parent = parent_index(i)
-
-        if data[parent] < data[i] and maxheap:
-            data[parent], data[i] = data[i], data[parent]
-            mod = True
-
-        if data[parent] > data[i] and not maxheap:
-            data[parent], data[i] = data[i], data[parent]
-            mod = True
-    return mod
+tree = [4,32,45, 3,2,7,3,8,54,38,88]
 
 
 
-def max_heap(data):
-    mod = True
-    while mod:
-        mod = swap(data, maxheap=True)
-    print 'MAX heap : ', data
+def parent(x):
+    if x % 2:
+        return (x - 1)/2
+    rturn (x/2) - 1
 
-def min_heap(data):
-    mod = True
-    while mod:
-        mod = swap(data)
-    print 'MIN heap : ', data
+def children(x):
+    lc = (x*2) + 1
+    rc = x * 2
+    return lc if lc < len(tree) else None, rc if rc < len(tree) else None
 
 
-max_heap(x[::])
-min_heap(x[::])
+def heapify(i):
+    lc, rc = children(i)
+    if lc:
+        heapify(lc)
+    if rc:
+        heapify(rc)
+
+    if lc and tree[lc] < tree[i]:
+        tree[i], tree[lc] = tree[lc], tree[i]
+    if rc and tree[rc] < tree[i]:
+        tree[i], tree[rc] = tree[rc], tree[i]
+
+
+
+
+
