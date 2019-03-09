@@ -1,0 +1,6 @@
+for y in range(10):
+    for x in range(10):
+        import time
+
+        time.sleep(0.1)
+        print("Progress {:2.1%}\n testing\n test hell".format(x / 10), end="\r")
