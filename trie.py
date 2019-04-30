@@ -22,6 +22,17 @@ def trie_recursion(trie_ds, word):
 
     return trie_ds
 
+def in_trie(trie, w):
+    try:
+        for l in w:
+            if trie[l]:
+                trie = trie[l]
+    except KeyError:
+        return False
+    return True
+
+
+
 for word in words:
     # Go through each word
     trie = trie_recursion(trie, deque(word))

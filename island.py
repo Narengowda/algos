@@ -1,10 +1,10 @@
 x = [
-[1,0,0,0,0,1],
+[0,0,1,0,0,1],
 [0,1,0,0,0,1],
 [1,0,1,0,0,0],
-[1,0,1,1,0,0],
+[1,0,1,1,1,0],
 [1,0,0,0,0,1],
-[0,0,0,1,0,0]
+[0,0,0,1,1,0]
 ]
 
 n = len(x[0])
@@ -32,8 +32,8 @@ out = {}
 
 def graph(i, j, link):
     r, c, d = route(i, j)
-    # print(r,c,d)
-    # import ipdb; ipdb.set_trace()  # XXX BREAKPOINT
+    print(r,c,d)
+    # import pdb; pdb.set_trace()  # XXX BREAKPOINT
 
     if x[i][j]:
         link.append((i,j))

@@ -1,45 +1,58 @@
+
+
 img = [
 [1, 1, 1, 1, 1, 1, 1, 1],
-[1, 1, 1, 1, 1, 1, 0, 0],
-[1, 0, 0, 1, 1, 0, 1, 1],
+[1, 1, 1, 1, 1, 1, 2, 0],
+[1, 0, 0, 1, 0, 2, 1, 1],
 [1, 2, 2, 2, 2, 0, 1, 0],
 [1, 1, 1, 2, 2, 0, 1, 0],
 [1, 1, 1, 2, 2, 2, 2, 0],
 [1, 1, 1, 1, 1, 2, 1, 1],
-[1, 1, 1, 1, 1, 2, 2, 1],
+[2, 2, 1, 1, 1, 2, 2, 1],
 ]
 
-point = (4, 4)
-color = 3
 
-lenx = 8
-leny = 8
+lenr = len(img)
+lenc = len(img[0])
 
 visited = []
 
-def next(x, y):
-    return [[x+1, y], [y+1, x], [x-1, y], [x, y-1]]
+def neighbours(r, c):
+    return [[r+1, c], [r+1, c], [r-1, c], [r, c-1],
+            [r+1, c+1], [r+1, c-1], [r-1, c-1], [r-1, c+1]]
 
 
-def flood_fill(x, y):
-    if x < 0 or x >= lenx:
+def flood_fill(r, c, color, replace_color):
+    if r < 0 or r >= lenr:
         return
 
-    if y < 0 or y >= leny:
+    if c < 0 or c >= lenc:
         return
 
+    if img[r][c] != color:
+        return
 
-    if img[x][y] == 2:
-        img[x][y] = color
+    img[r][c] = replace_color
 
-    visited.append([x,y])
+    visited.append([r, c])
 
-    moves = next(x, y)
+    moves = neighbours(r, c)
+
     for move in moves:
         if move not in visited:
-            flood_fill(*move)
+            flood_fill(move[0], move[1], color, replace_color)
 
 
-flood_fill(*point)
-for i in img:print i
+def flood_img():
+    print("Input")
 
+    for i in img:print i
+    replace_point = (4, 4)
+    flood_fill(*replace_point, color=2, replace_color=3)
+
+    print "-" * 25
+    print "output"
+    for i in img:print i
+
+
+flood_img()

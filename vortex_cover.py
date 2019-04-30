@@ -26,6 +26,7 @@ def check(k, check):
 
 
 for k, v in keys:
+    import pdb;pdb.set_trace()
     k_vals = vortex[v]
 
     # delete a node if all of its vertices are part of other node
